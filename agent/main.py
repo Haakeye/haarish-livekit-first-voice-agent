@@ -1,13 +1,3 @@
-"""
-First LiveKit Task-Driven Agent
-Author: Haarish Kumar
-
-Goal:
-- Initialize a LiveKit agent
-- Start an agent session
-- Observe pipeline flow (input -> processing -> output)
-"""
-
 import asyncio
 from livekit import rtc
 from livekit.agents import JobContext, WorkerOptions, cli
@@ -15,8 +5,7 @@ from livekit.agents import JobContext, WorkerOptions, cli
 
 async def entrypoint(ctx: JobContext):
     """
-    This function represents the agent lifecycle.
-    It is called when the agent session starts.
+    Agent lifecycle entrypoint
     """
 
     print("Agent started")
@@ -30,13 +19,13 @@ async def entrypoint(ctx: JobContext):
     async def on_participant_connected(participant: rtc.RemoteParticipant):
         print(f"INPUT: Participant joined -> {participant.identity}")
 
-        # STEP 3: Process input (simple processing logic)
+        # STEP 3: Process input
         response = f"Hello {participant.identity}, LiveKit agent is running"
 
-        # STEP 4: Output result
+        # STEP 4: Output
         print(f"OUTPUT: {response}")
 
-    # Keep the agent alive
+    # Keep agent alive
     await asyncio.Event().wait()
 
 
